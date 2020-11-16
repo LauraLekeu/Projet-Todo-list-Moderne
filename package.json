@@ -1,0 +1,20 @@
+{
+  "name": "Projet-Todo-list-Moderne",
+  "version": "1.0.0",
+  "description": "Projet-Todo-list-Moderne",
+  "main": "src/js/main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lauraIEPS/Projet-Todo-list-Moderne.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lauraIEPS/Projet-Todo-list-Moderne/issues"
+  },
+  "homepage": "https://github.com/lauraIEPS/Projet-Todo-list-Moderne#readme"
+}
