@@ -13,7 +13,7 @@ export default class TodoList {
   }
   loadData(data) {
     for (const item of data) {
-      this.todos.push(new Todo(item));
+      this.todos.push(new Todo({parent: this, todo: item}));
     }
   }
 
@@ -25,7 +25,7 @@ export default class TodoList {
     this.el.innerHTML = this.template; // A partir de mtn : le DOM existe pour le navigateur
     this.listEl = this.el.querySelector('.todo-list');
     for (const todo of this.todos) { // Rendu des todos
-      this.listEl.innerHTML += todo.render(); // += : this.listEl.innerHTML = this.listEl.innerHTML.todo.render();
+      this.listEl.appendChild(todo.render());  // += : this.listEl.innerHTML = this.listEl.innerHTML.todo.render();
     }
     // Calcul du nombre de todos restantes
     this.setNotCompletedNumber();
@@ -47,9 +47,9 @@ export default class TodoList {
   _addTodo () {
     const content = this.el.querySelector('.new-todo').value;
     const id = this.todos[this.todos.length -1].id + 1;
-    const newTodo = new Todo({id , content , completed: false});
+    const newTodo = new Todo({parent: this, todo: {id, content, completed: false }});
     this.todos.push(newTodo);
-    this.listEl.innerHTML += newTodo.render();
+    this.listEl.appendChild(newTodo.render());
     this.el.querySelector('.new-todo').value = '';
     // Re c alcul du nombre de todos restantes
     this.setNotCompletedNumber();
