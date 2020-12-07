@@ -3,8 +3,9 @@ import template from './templates/todoList';
 
 export default class TodoList {
   constructor (data) {
-    this.el    = document.querySelector(data.el);
+    this.el = document.querySelector(data.el);
     this.listEl;
+    this.notCompletedNumber;
     this.todos = [];
     this.loadData(data.todos);
     this.template = template;
@@ -26,8 +27,18 @@ export default class TodoList {
     for (const todo of this.todos) { // Rendu des todos
       this.listEl.innerHTML += todo.render(); // += : this.listEl.innerHTML = this.listEl.innerHTML.todo.render();
     }
+    // Calcul du nombre de todos restantes
+    this.setNotCompletedNumber();
     // Activation des éléments interactif
     this._activerBtns();
+
+  }
+
+  setNotCompletedNumber () {
+    this.notCompletedNumber = this.todos.filter(function(todo){ // filtrer les élément qui sont false
+      return todo.completed === false;
+    }).length;
+    this.el.querySelector('#todo-count').innerText = this.notCompletedNumber;
   }
 
 /**
@@ -40,6 +51,8 @@ export default class TodoList {
     this.todos.push(newTodo);
     this.listEl.innerHTML += newTodo.render();
     this.el.querySelector('.new-todo').value = '';
+    // Re c alcul du nombre de todos restantes
+    this.setNotCompletedNumber();
   }
 
   /**
