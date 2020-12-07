@@ -15,11 +15,43 @@ export default class TodoList {
       this.todos.push(new Todo(item));
     }
   }
+
+  /**
+   * [render description]
+   * @return {[type]} [description]
+   */
   render () {
-    this.el.innerHTML = this.template;
+    this.el.innerHTML = this.template; // A partir de mtn : le DOM existe pour le navigateur
     this.listEl = this.el.querySelector('.todo-list');
-    for (const todo of this.todos) {
+    for (const todo of this.todos) { // Rendu des todos
       this.listEl.innerHTML += todo.render(); // += : this.listEl.innerHTML = this.listEl.innerHTML.todo.render();
+    }
+    // Activation des éléments interactif
+    this._activerBtns();
+  }
+
+/**
+ * Ajout d'un todo
+ */
+  _addTodo () {
+    const content = this.el.querySelector('.new-todo').value;
+    const id = this.todos[this.todos.length -1].id + 1;
+    const newTodo = new Todo({id , content , completed: false});
+    this.todos.push(newTodo);
+    this.listEl.innerHTML += newTodo.render();
+    this.el.querySelector('.new-todo').value = '';
+  }
+
+  /**
+   * Activation des éléments interactifs de la todoList
+   * @return {[type]} [description]
+   */
+   _activerBtns () {
+    // Activation de l'input newTodo
+    this.el.querySelector('.new-todo').onkeyup = (e) => {
+      if(e.keyCode === 13) {
+        this._addTodo();
+      }
     }
   }
 }
