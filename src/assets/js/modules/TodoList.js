@@ -55,6 +55,13 @@ export default class TodoList {
     this.setNotCompletedNumber();
   }
 
+  removeOneById (id) {
+    this.todos = this.todos.filter(function(todo){
+      return todo.id !== todo.id;
+    });
+    this.setNotCompletedNumber();
+  }
+
   /**
    * Activation des éléments interactifs de la todoList
    * @return {[type]} [description]

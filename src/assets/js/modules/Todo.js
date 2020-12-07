@@ -40,6 +40,11 @@ export default class Todo {
     this.parent.setNotCompletedNumber();
   }
 
+  _destroy () {
+    this.el.remove();
+    this.parent.removeOneById(this.id);
+  }
+
 /**
  * Activation des éléments interactifs du todo
  * @return {[type]} [description]
@@ -49,7 +54,10 @@ export default class Todo {
     this.el.querySelector('.toggle').onclick = () => {
       this._toggleCompleted();
     }
-
+    // Activation des .toggle
+    this.el.querySelector('.destroy').onclick = () => {
+      this._destroy();
+    }
   }
 
 }
