@@ -88,7 +88,7 @@ export default class TodoList {
    _activerBtns () {
     // Activation de l'input newTodo
     this.el.querySelector('.new-todo').onkeyup = (e) => {
-      if(e.keyCode === 13) {
+      if(e.keyCode === 13 && this.el.querySelector('.new-todo').value != '') { // L'input ne peut pas être vide
         this._addTodo();
       }
     }
