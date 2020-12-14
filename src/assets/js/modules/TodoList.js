@@ -56,25 +56,30 @@ export default class TodoList {
   }
 
   removeOneById (id) {
-    this.todos = this.todos.filter(function(todo){
-      return todo.id !== todo.id;
-    });
+    this.todos = this.todos.filter(function(todo) { return todo.id !== todo.id; });
     this.setNotCompletedNumber();
   }
 
   _filter (filterRecup) {
     switch (filterRecup) {
       case 'active':
-        this.render(this.todos.filter(function (todo) { return !todo.completed;}));
+        this.render(this.todos.filter(function(todo) { return !todo.completed; }));
         break;
       case 'completed':
-        this.render(this.todos.filter(function (todo) { return todo.completed;}));
+        this.render(this.todos.filter(function(todo) { return todo.completed; }));
         break;
       default:  // All
       this.render(this.todos);
-
     }
   }
+
+  _completeAll () {
+    const notComleted = this.todos.filter(function(todo) { return !todo.completed; });
+    for(let todo of notComleted) {
+      todo._toggleCompleted();
+    }
+  }
+
 
   /**
    * Activation des éléments interactifs de la todoList
@@ -92,8 +97,12 @@ export default class TodoList {
      for (let filterBtn of filterBtns) {
       filterBtn.onclick = () => {
         this._filter(filterBtn.dataset.filter); // Chercher les data des filter
-      }
-
+       }
      }
+
+     // Activation du btn .toggle-all
+  this.el.querySelector('#toggle-all').onclick = () => {
+         this._completeAll();
+       }
   }
 }

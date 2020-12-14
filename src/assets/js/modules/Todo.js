@@ -33,8 +33,18 @@ export default class Todo {
     return this.el;
   }
 
+/**
+ * Complete all todos notcompleted
+ * @return {[type]} [description]
+ */
   _toggleCompleted () {
-    this.completed = ! this.completed;
+    this.completed = !this.completed;
+    if(this.completed){ // = true
+      this.el.querySelector('.toggle').checked = true;
+    }
+    else{ // =false
+      this.el.querySelector('.toggle').removeAttribute('checked');
+    }
     this.el.querySelector('li').classList.toggle('completed');
     // Lancer le parent setNotCompleted
     this.parent.setNotCompletedNumber();
